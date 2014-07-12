@@ -1,0 +1,23 @@
+<ion-view title="Couple Up">
+    <ion-content>
+        <div class="padding">
+            <h2>Your Code</h2>
+            <p>{{ user.code }}</p>
+            <p>Share this with your partner</p>
+
+            <h2>Enter your partners code</h2>
+        </div>
+        <div class="list">
+            <label class="item item-input">
+                <span class="input-label">Partners Code</span>
+                <input type="text" ng-model="code">
+            </label>
+        </div>
+
+        <div class="padding">
+            <button class="button button-block button-positive" ng-click="connect(code)">
+                Connect
+            </button>
+        </div>
+    </ion-content>
+</ion-view>

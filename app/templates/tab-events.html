@@ -1,0 +1,66 @@
+<ion-view title="Events">
+    <!-- <ion-nav-buttons side="right">
+    <button class="button button-clear" ui-sref="tab.contacts-find">
+        <i class="icon ion-heart"></i> 32
+    </button>
+
+</ion-nav-buttons>
+ -->
+
+    <!-- <ion-header-bar align-title="left" class="bar bar-subheader bar-stable" style="background-color: #FFFCD7">
+        <button >Explore</button>
+        <button ><i class="icon ion-heart"></i> {{ events.shared.length }}</button>
+    </ion-header-bar> -->
+
+
+    <ion-content class="has-header padding">
+        <div class="button-bar">
+            <a class="button" ng-class="{'active' : data.activeButton == 1}" ng-click="showAll()">
+            Explore
+            </a>
+            <a class="button" ng-class="{'active' : data.activeButton == 2}" ng-click="showShared()">
+                <i class="icon ion-heart"></i> {{ events.shared.length }}
+            </a>
+        </div>
+
+        <div class="list card" ng-repeat="event in visibleEvents">
+
+            <div class="item item-avatar">
+                <img ng-src="{{ event.image }}">
+                <h2 style="white-space: normal">{{ event.title }}</h2>
+                <p>{{ event.start * 1000 | date:'medium' }}</p>
+                <p>{{ event.end * 1000 | date: 'medium' }}</p>
+            </div>
+
+            <div class="item item-body">
+                <img ng-if="event.image" class="full-image" ng-src="{{ event.image }}">
+                <p>
+                    {{ event.description }}
+                </p>
+                <p>
+                    {{ event.location }}
+                </p>
+                <!-- <p>
+                    <a href="#" class="subdued">1 Like</a>
+                    <a href="#" class="subdued">5 Comments</a>
+                </p> -->
+            </div>
+
+            <div class="item tabs tabs-secondary tabs-icon-left">
+
+                <a class="tab-item" ng-click="heart(event)">
+                    <i class="icon ion-heart"></i>
+                </a>
+                <!--<a class="tab-item" href="#">
+                    <i class="icon ion-chatbox"></i>
+                    Comment
+                </a>-->
+                <!--<a class="tab-item" href="#">
+                    <i class="icon ion-share"></i>
+                    Share
+                </a>-->
+            </div>
+
+        </div>
+    </ion-content>
+</ion-view>
