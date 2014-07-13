@@ -13,7 +13,7 @@ angular.module('datenightClientApp', [
     'restangular'
 ])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $rootScope, $state, Restangular, $ionicScrollDelegate, $timeout) {
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -25,12 +25,44 @@ angular.module('datenightClientApp', [
             StatusBar.styleDefault();
         }
     });
+
+    $rootScope.tab = 'all';
+    $rootScope.showAll = function() {
+        $rootScope.tab = 'all';
+        $timeout(function() {
+            $rootScope.events = $rootScope.eventsData.all;
+        });
+        // $rootScope.events = $rootScope.eventsData.all;
+        $ionicScrollDelegate.scrollTop();
+        // $rootScope.eventsData.all = events;
+        // Restangular.one('me').all('events').getList().then(function(events) {
+        //     $rootScope.eventsData.all = events;
+        //     $rootScope.events = events;
+        // });
+    };
+    $rootScope.showShared = function() {
+        $rootScope.tab = 'shared';
+        $timeout(function() {
+            $rootScope.events = $rootScope.eventsData.shared;
+        });
+
+        $ionicScrollDelegate.scrollTop();
+        // Restangular.one('me').all('events2').getList().then(function(events) {
+        //     $rootScope.eventsData.shared = events;
+        //     $rootScope.events = events;
+        // });
+
+    };
+    $rootScope.eventsData = {};
+
+    $rootScope.$state = $state;
 })
 
 .config(function($stateProvider, $urlRouterProvider, RestangularProvider) {
 
-    RestangularProvider.setBaseUrl('/api/index.php');
+    RestangularProvider.setBaseUrl('http://ec2-54-206-66-123.ap-southeast-2.compute.amazonaws.com/datenight/api/index.php');
 
+    // RestangularProvider.setBaseUrl('/api/index.php');
     // Ionic uses AngularUI Router which uses the concept of states
     // Learn more here: https://github.com/angular-ui/ui-router
     // Set up the various states which the app can be in.
@@ -44,65 +76,33 @@ angular.module('datenightClientApp', [
         templateUrl: 'templates/tabs.html'
     })
 
+    .state('start', {
+        url: '/start',
+        templateUrl: 'templates/start.html',
+        controller: 'StartCtrl'
+    })
+
     .state('signin', {
         url: '/sign-in',
         templateUrl: 'templates/sign-in.html',
         controller: 'SignInCtrl'
     })
 
-    .state('hearts', {
-        url: '/hearts',
-        templateUrl: 'hearts.html',
-        controller: 'HeartsCtrl'
-    })
-
-    // Each tab has its own nav history stack:
-
-    .state('tab.dash', {
-        url: '/dash',
-        views: {
-            'tab-dash': {
-                templateUrl: 'templates/tab-dash.html',
-                controller: 'DashCtrl'
-            }
-        }
-    })
-
     .state('tab.events', {
         url: '/events',
         views: {
             'tab-events': {
+                resolve: {
+                    user: ['Restangular', '$state',
+                        function(Restangular, $state) {
+                            return Restangular.one('me').one('user').get().catch(function() {
+                                $state.go('start');
+                            });
+                        }
+                    ]
+                },
                 templateUrl: 'templates/tab-events.html',
                 controller: 'EventsCtrl'
-            }
-        }
-    })
-
-    .state('tab.friends', {
-            url: '/friends',
-            views: {
-                'tab-friends': {
-                    templateUrl: 'templates/tab-friends.html',
-                    controller: 'FriendsCtrl'
-                }
-            }
-        })
-        .state('tab.friend-detail', {
-            url: '/friend/:friendId',
-            views: {
-                'tab-friends': {
-                    templateUrl: 'templates/friend-detail.html',
-                    controller: 'FriendDetailCtrl'
-                }
-            }
-        })
-
-    .state('tab.account', {
-        url: '/account',
-        views: {
-            'tab-account': {
-                templateUrl: 'templates/tab-account.html',
-                controller: 'AccountCtrl'
             }
         }
     });

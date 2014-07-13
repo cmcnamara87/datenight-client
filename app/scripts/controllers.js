@@ -1,7 +1,7 @@
 'use strict';
 angular.module('datenightClientApp.controllers', [])
 
-.controller('DashCtrl', function($scope) {})
+.controller('DashCtrl', function() {})
 
 .controller('FriendsCtrl', function($scope, Friends) {
     $scope.friends = Friends.all();
@@ -11,4 +11,4 @@ angular.module('datenightClientApp.controllers', [])
     $scope.friend = Friends.get($stateParams.friendId);
 })
 
-.controller('AccountCtrl', function($scope) {});
+.controller('AccountCtrl', function() {});

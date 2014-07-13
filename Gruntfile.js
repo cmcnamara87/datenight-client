@@ -65,18 +65,19 @@ module.exports = function(grunt) {
             },
             proxies: [{
                 context: '/api',
-                host: '127.0.0.1',
-                port: 8888,
+                host: 'ec2-54-206-66-123.ap-southeast-2.compute.amazonaws.com',
+                // port: 8888,
                 rewrite: {
-                    '^/api': ''
-                }
+                    '^/api': '/datenight/api'
+                },
                 // https: false,
-                // changeOrigin: false,
-                // xforward: false,
+                changeOrigin: true,
+                xforward: true,
                 // headers: {
                 // "x-custom-added-header": value
                 // }
             }],
+
             livereload: {
                 options: {
                     open: true,

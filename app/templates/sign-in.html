@@ -1,23 +1,44 @@
 <ion-view title="Couple Up">
-    <ion-content>
-        <div class="padding">
-            <h2>Your Code</h2>
-            <p>{{ user.code }}</p>
-            <p>Share this with your partner</p>
+    <ion-content scroll="false">
+        <div class="row" style="height: 100%;">
+            <div class="col col-center" style="position: relative; top: -45px;">
+                <div>
 
-            <h2>Enter your partners code</h2>
-        </div>
-        <div class="list">
-            <label class="item item-input">
-                <span class="input-label">Partners Code</span>
-                <input type="text" ng-model="code">
-            </label>
+                    <div class="padding">
+                        <h1 style="text-align: center; position: relative; left: -10px; font-weight: 200; margin-bottom:15px;">
+                            <img src="images/logo.png" style="max-width: 100%; width: 50px; vertical-align:middle; margin-right: 10px; position: relative; top: -4px">DateNight
+                        </h1>
+
+                        <!-- <h2 style="text-align: center; font-weight:200;">Love Code
+</h2>
+ -->
+                        <p style="text-align: center; color: #888; margin-bottom: 25px;">Swap codes with your partner.</p>
+                        <div style="text-align: center;">
+                            <div style="position: relative; border: 1px solid #ddd; padding: 12px 30px; font-size: 16px; border-radius: 100px; margin-bottom: 0px; background-color: #eee; color: #444">
+                                <i class="icon ion-heart" style="position: absolute; left: 10px;">&nbsp;Yours</i>
+                                {{ user.code || 'loading' }}
+                            </div>
+                        </div>
+                        <!-- <h3 style="text-align: center; font-weight:200; margin-bottom: 0px;">Your Partner's Code</h3>
+ -->
+                    </div>
+                    <div class="list list-inset" style="margin-top: 0; margin-bottom: 10px;">
+                        <label class="item item-input" style="border-radius: 100px;">
+                            <i class="icon ion-heart placeholder-icon">&nbsp; Theirs</i>
+                            <input type="text" placeholder="What's their code?" style="text-align: center" ng-model="code">
+                        </label>
+                    </div>
+
+                    <div class="padding" ng-show="code.length">
+                        <button ng-disabled="isWaiting" style="border-radius:100px; display: block; padding: 5px; 20px; width: 100%; background-color: #009EE3; border: none;" class="button button-positive" ng-click="connect(code)">
+                            <span ng-hide="isWaiting">Pair</span>
+                            <span ng-show="isWaiting">Waiting for your partner</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="padding">
-            <button class="button button-block button-positive" ng-click="connect(code)">
-                Connect
-            </button>
-        </div>
+
     </ion-content>
 </ion-view>

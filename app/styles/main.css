@@ -1,8 +1,61 @@
 /* Your app's CSS, go crazy, make it your own */
 
 .ionic-logo {
-  display: block;
-  margin: 15px auto;
-  width: 96px;
-  height: 96px;
+    display: block;
+    margin: 15px auto;
+    width: 96px;
+    height: 96px;
 }
+.bar.bar-positive {
+    background-color: #009EE3;
+    border: none;
+    background-image: none;
+}
+.button.blue {
+    background-color: #009EE3;
+    border: 1px solid #0187C2;
+    box-shadow: none;
+}
+.button.blue.active {
+    background-color: #197AA5;
+    color: white;
+    box-shadow: none;
+    border: 1px solid #197AA5;
+}
+.button.blue:active {
+    background-color: #197AA5;
+    color: white;
+    box-shadow: none;
+    border: 1px solid #197AA5;
+}
+div.ng-enter {
+    -webkit-animation: bounceInUp 0.5s;
+    animation: bounceInUp 0.5s;
+}
+/*.event-card.ng-leave {
+    -webkit-animation: zoomOutRight 0.5s;
+    animation: zoomOutRight 0.5s;
+    -webkit-animation: zoomOutUp 0.5s;
+    animation: zoomOutUp 0.5s;
+}
+*/
+
+.more-info.ng-hide-remove {
+    -webkit-animation: fadeInDown 0.5s;
+    animation: fadeInDown 0.5s;
+}
+.more-info.ng-hide-add {
+    -webkit-animation: fadeOutUp 0.2s;
+    animation: fadeOutUp 0.2s;
+    display: block !important;
+}
+/*.button.button-heart {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    max-width: 40px;
+    max-height: 40px;
+    width: 100%;
+    border-radius: 100px;
+}
+*/
